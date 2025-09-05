@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Composting Analyzer</title>
+  <link rel="stylesheet" href="static/css/style.css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+</head>
+<body class="auth-body">
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <i class="fas fa-seedling"></i>
+        <h1>Composting Efficiency Analyzer</h1>
+        <p>Analyze and optimize your composting processes</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+        <button class="tab-btn" onclick="switchTab('register')">Register</button>
+      </div>
+
+      <!-- Login Form -->
+      <div id="loginForm" class="auth-form active">
+        <form onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label for="loginUsername"><i class="fas fa-user"></i> Username</label>
+            <input type="text" id="loginUsername" required placeholder="Enter your username"/>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword"><i class="fas fa-lock"></i> Password</label>
+            <input type="password" id="loginPassword" required placeholder="Enter your password"/>
+          </div>
+          <button type="submit" class="btn-primary auth-btn">
+            <i class="fas fa-sign-in-alt"></i> Login
+          </button>
+        </form>
+      </div>
+
+      <!-- Register Form -->
+      <div id="registerForm" class="auth-form">
+        <form onsubmit="handleRegister(event)">
+          <div class="form-group">
+            <label for="registerUsername"><i class="fas fa-user"></i> Username</label>
+            <input type="text" id="registerUsername" required placeholder="Choose a username"/>
+          </div>
+          <div class="form-group">
+            <label for="registerEmail"><i class="fas fa-envelope"></i> Email</label>
+            <input type="email" id="registerEmail" required placeholder="Enter your email"/>
+          </div>
+          <div class="form-group">
+            <label for="registerPassword"><i class="fas fa-lock"></i> Password</label>
+            <input type="password" id="registerPassword" required placeholder="Choose a password" minlength="6"/>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword"><i class="fas fa-lock"></i> Confirm Password</label>
+            <input type="password" id="confirmPassword" required placeholder="Confirm your password"/>
+          </div>
+          <button type="submit" class="btn-primary auth-btn">
+            <i class="fas fa-user-plus"></i> Register
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="auth-features">
+      <h3>Features</h3>
+      <ul>
+        <li><i class="fas fa-chart-bar"></i> Comprehensive analytics dashboard</li>
+        <li><i class="fas fa-file-export"></i> Export data to CSV/Excel</li>
+        <li><i class="fas fa-file-pdf"></i> Generate detailed PDF reports</li>
+        <li><i class="fas fa-lightbulb"></i> Get personalized best practices</li>
+        <li><i class="fas fa-mobile-alt"></i> Mobile-responsive design</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    function switchTab(tab) {
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+      const tabs = document.querySelectorAll('.tab-btn');
+      
+      tabs.forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+
+      if (tab === 'login') {
+        loginForm.classList.add('active');
+        registerForm.classList.remove('active');
+      } else {
+        registerForm.classList.add('active');
+        loginForm.classList.remove('active');
+      }
+    }
+
+    function handleLogin(event) {
+      event.preventDefault();
+      const username = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
+
+      const users = JSON.parse(localStorage.getItem('users')) || {};
+      if (users[username] && users[username].password === password) {
+        localStorage.setItem('token', 'mockToken123');
+        localStorage.setItem('username', username);
+        showToast('Login successful!', 'success');
+        setTimeout(() => window.location.href = 'index.html', 1000);
+      } else {
+        showToast('Invalid username or password', 'error');
+      }
+    }
+
+    function handleRegister(event) {
+      event.preventDefault();
+      const username = document.getElementById('registerUsername').value;
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      if (password !== confirmPassword) {
+        showToast('Passwords do not match', 'error');
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem('users')) || {};
+      if (users[username]) {
+        showToast('Username already exists', 'error');
+        return;
+      }
+
+      users[username] = { email, password };
+      localStorage.setItem('users', JSON.stringify(users));
+      localStorage.setItem('token', 'mockToken123');
+      localStorage.setItem('username', username);
+
+      showToast('Registration successful!', 'success');
+      setTimeout(() => window.location.href = 'index.html', 1000);
+    }
+
+    function showToast(message, type = 'info') {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.className = `toast ${type} show`;
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // Redirect if already logged in
+    if (localStorage.getItem('token')) {
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

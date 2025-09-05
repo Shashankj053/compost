@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Composting Analyzer</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-seedling"></i>
+                <span>Compost Analyzer</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Add Data</a>
+                <a href="dashboard.html" class="nav-link active">Dashboard</a>
+                <a href="tutorial.html" class="nav-link">Tutorial</a>
+                <a href="#" class="nav-link" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h1><i class="fas fa-chart-line"></i> Analytics Dashboard</h1>
+            <div class="dashboard-actions">
+                <button class="btn-secondary" onclick="exportData()">
+                    <i class="fas fa-download"></i> Export CSV
+                </button>
+                <button class="btn-secondary" onclick="generateReport()">
+                    <i class="fas fa-file-pdf"></i> Generate Report
+                </button>
+                <button class="btn-secondary" onclick="showBestPractices()">
+                    <i class="fas fa-star"></i> Best Practices
+                </button>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-vial"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="totalExperiments">0</h3>
+                    <p>Total Experiments</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="avgEfficiency">0</h3>
+                    <p>Avg Efficiency Score</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="avgDays">0</h3>
+                    <p>Avg Decomposition Days</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="bestBin">-</h3>
+                    <p>Best Performing Bin</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-container">
+                <h3><i class="fas fa-bar-chart"></i> Efficiency Scores by Bin</h3>
+                <div id="efficiencyChart"></div>
+            </div>
+            <div class="chart-container">
+                <h3><i class="fas fa-line-chart"></i> Temperature vs Decomposition Time</h3>
+                <div id="tempChart"></div>
+            </div>
+            <div class="chart-container">
+                <h3><i class="fas fa-chart-pie"></i> NPK Values Distribution</h3>
+                <div id="npkChart"></div>
+            </div>
+            <div class="chart-container">
+                <h3><i class="fas fa-chart-area"></i> Parameter Distribution</h3>
+                <div id="paramChart"></div>
+            </div>
+        </div>
+
+        <div class="data-table-container">
+            <h3><i class="fas fa-table"></i> Experiments Data</h3>
+            <div class="table-responsive">
+                <table id="experimentsTable" class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Bin ID</th>
+                            <th>C/N Ratio</th>
+                            <th>Moisture %</th>
+                            <th>Temperature °C</th>
+                            <th>Aeration/Week</th>
+                            <th>Odor Level</th>
+                            <th>Days</th>
+                            <th>N-P-K</th>
+                            <th>Efficiency Score</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Best Practices Modal -->
+    <div id="bestPracticesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-star"></i> Best Practices Recommendations</h2>
+                <span class="close" onclick="closeBestPractices()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="bestPracticesContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="static/js/dashboard.js"></script>
+</body>
+</html>

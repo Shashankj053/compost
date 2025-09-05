@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial - Composting Analyzer</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-seedling"></i>
+                <span>Compost Analyzer</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Add Data</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="tutorial.html" class="nav-link active">Tutorial</a>
+                <a href="#" class="nav-link" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tutorial-header">
+            <h1><i class="fas fa-book"></i> Composting Efficiency Analysis Tutorial</h1>
+            <p>Learn how to use the application and understand composting science</p>
+        </div>
+
+        <div class="tutorial-content">
+            <div class="tutorial-section">
+                <h2><i class="fas fa-play-circle"></i> Getting Started</h2>
+                <div class="tutorial-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Create Your Account</h3>
+                            <p>Register with a username, email, and password to start tracking your composting experiments.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Add Experiment Data</h3>
+                            <p>Fill out the data entry form with your composting bin measurements and parameters.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>View Analytics</h3>
+                            <p>Check the dashboard for insights, charts, and efficiency scores of your experiments.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Generate Reports</h3>
+                            <p>Export your data or generate PDF reports with recommendations and best practices.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tutorial-section">
+                <h2><i class="fas fa-flask"></i> Understanding Parameters</h2>
+                <div class="parameter-grid">
+                    <div class="parameter-card">
+                        <div class="parameter-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h3>C/N Ratio</h3>
+                        <p><strong>Optimal:</strong> 25-30</p>
+                        <p>The carbon-to-nitrogen ratio is crucial for microbial activity. Too high = slow decomposition, too low = odor problems.</p>
+                    </div>
+                    <div class="parameter-card">
+                        <div class="parameter-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h3>Moisture Level</h3>
+                        <p><strong>Optimal:</strong> 50-60%</p>
+                        <p>Moisture is essential for microbial activity. Too dry = slow process, too wet = anaerobic conditions.</p>
+                    </div>
+                    <div class="parameter-card">
+                        <div class="parameter-icon">
+                            <i class="fas fa-thermometer-half"></i>
+                        </div>
+                        <h3>Temperature</h3>
+                        <p><strong>Optimal:</strong> 55-65°C</p>
+                        <p>High temperatures indicate active decomposition and help kill pathogens and weed seeds.</p>
+                    </div>
+                    <div class="parameter-card">
+                        <div class="parameter-icon">
+                            <i class="fas fa-wind"></i>
+                        </div>
+                        <h3>Aeration</h3>
+                        <p><strong>Optimal:</strong> 3-5 times/week</p>
+                        <p>Oxygen is needed for aerobic decomposition. Regular turning prevents anaerobic conditions.</p>
+                    </div>
+                    <div class="parameter-card">
+                        <div class="parameter-icon">
+                            <i class="fas fa-nose"></i>
+                        </div>
+                        <h3>Odor Level</h3>
+                        <p><strong>Optimal:</strong> 1-2 (earthy smell)</p>
+                        <p>Strong odors indicate anaerobic conditions or imbalanced nutrients. Good compost smells earthy.</p>
+                    </div>
+                    <div class="parameter-card">
+                        <div class="parameter-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h3>NPK Values</h3>
+                        <p><strong>Higher is better</strong></p>
+                        <p>Nitrogen, Phosphorus, and Potassium are essential plant nutrients. Higher values indicate richer compost.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tutorial-section">
+                <h2><i class="fas fa-chart-line"></i> Efficiency Score Calculation</h2>
+                <div class="score-explanation">
+                    <p>The efficiency score (0-100) is calculated based on how well your composting parameters align with optimal ranges:</p>
+                    <ul>
+                        <li><strong>C/N Ratio (20 points):</strong> Best score for 25-30 ratio</li>
+                        <li><strong>Moisture Level (20 points):</strong> Best score for 50-60%</li>
+                        <li><strong>Temperature (20 points):</strong> Best score for 55-65°C</li>
+                        <li><strong>Aeration (15 points):</strong> Best score for 3-5 times per week</li>
+                        <li><strong>Odor Level (10 points):</strong> Best score for levels 1-2</li>
+                        <li><strong>Decomposition Time (15 points):</strong> Bonus points for faster decomposition</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tutorial-section">
+                <h2><i class="fas fa-lightbulb"></i> Best Practices Tips</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <i class="fas fa-leaf"></i>
+                        <h3>Material Balance</h3>
+                        <p>Mix 3 parts brown materials (carbon) with 1 part green materials (nitrogen) for optimal C/N ratio.</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-eye"></i>
+                        <h3>Monitor Regularly</h3>
+                        <p>Check temperature, moisture, and odor weekly. Adjust aeration and materials as needed.</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-scissors"></i>
+                        <h3>Size Matters</h3>
+                        <p>Chop materials into smaller pieces (1-2 inches) to speed up decomposition process.</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-thermometer"></i>
+                        <h3>Temperature Phases</h3>
+                        <p>Expect mesophilic (20-40°C) → thermophilic (40-70°C) → cooling → maturation phases.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tutorial-section">
+                <h2><i class="fas fa-question-circle"></i> Troubleshooting</h2>
+                <div class="troubleshooting">
+                    <div class="problem">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Strong Ammonia Smell</h3>
+                        <p><strong>Cause:</strong> Too much nitrogen (low C/N ratio)</p>
+                        <p><strong>Solution:</strong> Add brown materials (leaves, paper, cardboard)</p>
+                    </div>
+                    <div class="problem">
+                        <h3><i class="fas fa-snowflake"></i> Low Temperature</h3>
+                        <p><strong>Cause:</strong> Too dry, too small pile, or wrong C/N ratio</p>
+                        <p><strong>Solution:</strong> Add water, increase pile size, adjust materials</p>
+                    </div>
+                    <div class="problem">
+                        <h3><i class="fas fa-bug"></i> Pests or Flies</h3>
+                        <p><strong>Cause:</strong> Food scraps on surface or too wet</p>
+                        <p><strong>Solution:</strong> Bury food scraps, reduce moisture, turn more frequently</p>
+                    </div>
+                    <div class="problem">
+                        <h3><i class="fas fa-clock"></i> Slow Decomposition</h3>
+                        <p><strong>Cause:</strong> High C/N ratio, too dry, lack of aeration</p>
+                        <p><strong>Solution:</strong> Add green materials, increase moisture, turn pile regularly</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Composting Efficiency Analyzer. Built for environmental research.</p>
+    </footer>
+
+    <script src="static/js/main.js"></script>
+</body>
+</html>

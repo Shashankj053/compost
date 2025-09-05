@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Composting Efficiency Analysis</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-seedling"></i>
+                <span>Compost Analyzer</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link active">Add Data</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="tutorial.html" class="nav-link">Tutorial</a>
+                <a href="#" class="nav-link" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="welcome-section">
+            <h1><i class="fas fa-leaf"></i> Composting Experiment Data Entry</h1>
+            <p>Enter your composting experiment data to analyze efficiency and generate insights.</p>
+        </div>
+
+        <div class="form-container">
+            <form id="experimentForm" class="experiment-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="binId"><i class="fas fa-trash-alt"></i> Bin ID</label>
+                        <input type="text" id="binId" name="bin_id" required placeholder="e.g., BIN-001">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cnRatio"><i class="fas fa-balance-scale"></i> C/N Ratio</label>
+                        <input type="number" id="cnRatio" name="cn_ratio" step="0.1" required placeholder="e.g., 25.5">
+                        <small>Optimal: 25-30</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="moistureLevel"><i class="fas fa-tint"></i> Moisture Level (%)</label>
+                        <input type="number" id="moistureLevel" name="moisture_level" step="0.1" min="0" max="100" required placeholder="e.g., 55.0">
+                        <small>Optimal: 50-60%</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="aerationFreq"><i class="fas fa-wind"></i> Aeration Frequency (per week)</label>
+                        <input type="number" id="aerationFreq" name="aeration_frequency" min="0" required placeholder="e.g., 3">
+                        <small>Optimal: 3-5 times</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dailyTemp"><i class="fas fa-thermometer-half"></i> Daily Temperature (°C)</label>
+                        <input type="number" id="dailyTemp" name="daily_temperature" step="0.1" required placeholder="e.g., 60.0">
+                        <small>Optimal: 55-65°C</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="odorLevel"><i class="fas fa-nose"></i> Odor Level (1-5)</label>
+                        <select id="odorLevel" name="odor_level" required>
+                            <option value="">Select level</option>
+                            <option value="1">1 - No odor</option>
+                            <option value="2">2 - Slight earthy smell</option>
+                            <option value="3">3 - Moderate smell</option>
+                            <option value="4">4 - Strong smell</option>
+                            <option value="5">5 - Very unpleasant</option>
+                        </select>
+                        <small>Optimal: 1-2</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="decompDays"><i class="fas fa-calendar-alt"></i> Decomposition Days</label>
+                        <input type="number" id="decompDays" name="decomposition_days" min="1" required placeholder="e.g., 45">
+                        <small>Target: 30-60 days</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="finalN"><i class="fas fa-flask"></i> Final Nitrogen (N)</label>
+                        <input type="number" id="finalN" name="final_n" step="0.01" required placeholder="e.g., 2.5">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="finalP"><i class="fas fa-flask"></i> Final Phosphorus (P)</label>
+                        <input type="number" id="finalP" name="final_p" step="0.01" required placeholder="e.g., 1.2">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="finalK"><i class="fas fa-flask"></i> Final Potassium (K)</label>
+                        <input type="number" id="finalK" name="final_k" step="0.01" required placeholder="e.g., 1.8">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-plus"></i> Add Experiment
+                    </button>
+                    <button type="reset" class="btn-secondary">
+                        <i class="fas fa-undo"></i> Reset Form
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="info-section">
+            <div class="info-card">
+                <h3><i class="fas fa-lightbulb"></i> Quick Tips</h3>
+                <ul>
+                    <li>Maintain C/N ratio between 25-30 for optimal decomposition</li>
+                    <li>Keep moisture levels around 50-60%</li>
+                    <li>Temperature should be 55-65°C for active composting</li>
+                    <li>Regular aeration (3-5 times/week) prevents anaerobic conditions</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Composting Efficiency Analyzer. Built for environmental research.</p>
+    </footer>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="static/js/main.js"></script>
+</body>
+</html>
