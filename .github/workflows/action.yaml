@@ -1,0 +1,43 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Google Cloud CLI
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          project_id: ${{ secrets.wide-hulling-469812-a3 }}
+      - name: Deploy frontend to GCS
+        run: |
+          gsutil -m rsync -r frontend/ gs://your-frontend-bucket
+
+  deploy-backend:
+    runs-on: ubuntu-latest
+    needs: deploy-frontend
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Google Cloud CLI
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          project_id: ${{ secrets.wide-hulling-469812-a3}}
+      - name: SSH and deploy backend
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.35.209.170.131 }}
+          username: ${{ secrets.shashankjain053098 }}
+          key: ${{ secrets.ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCJnOzgX1EygWCLCXIe6J1g8tmrK417U6ZHR+is/XW+TFkjT9lfJT496CPf4/BJcI4ySzIfZoFz uH1VIo326JQKEPURcYDQXrEZ7sBsOdtuwBK/r81Hy4EQHnxoJghVVZQf/3yZSIYp5bkjhzkFe544wDR2sGqN92uixFOI2GeQh+cdQFnVTwp49BrJ ICUUgN2Oy/DYfiVQ8xUvlxf+/8pyWhPb4V1JXaLNINwlaOrgYWa3bv0zcmMixH8s3kntRZlJt6VX0BGvlQH/m8Si+AG17y4enzWlH/lHtJD3cFNe 7U90r9682gnh7vGF7j7SUwAPp4naGcdNFCHsXg42016D google-ssh {"userName":"shashankjain053098@gmail.com", "expireOn":"2 025-09-05T16:41:51+0000")
+}}
+          script: |
+            cd /path/to/backend
+            git pull origin main
+            source venv/bin/activate
+            pip install -r requirements.txt
+            systemctl restart backend.service
