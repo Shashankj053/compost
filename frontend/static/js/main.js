@@ -1,5 +1,5 @@
 // API Configuration
-const API_BASE_URL = 'http://localhost:5501/api';
+const API_BASE_URL = 'http://localhost:5000/api';
 
 // Authentication check
 function checkAuth() {
@@ -141,7 +141,6 @@ async function handleExperimentSubmit(event) {
 function formatNumber(num, decimals = 2) {
     return parseFloat(num).toFixed(decimals);
 }
-
 function formatDate(dateString) {
     const date = new Date(dateString);
     return date.toLocaleDateString();
@@ -150,118 +149,4 @@ function formatDate(dateString) {
 // Export function for data download
 async function exportData() {
     try {
-        const response = await fetch(`${API_BASE_URL}/export`, {
-            method: 'GET',
-            headers: getHeaders()
-        });
-        
-        if (response.ok) {
-            const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.style.display = 'none';
-            a.href = url;
-            a.download = `composting_data_${new Date().toISOString().split('T')[0]}.csv`;
-            document.body.appendChild(a);
-            a.click();
-            window.URL.revokeObjectURL(url);
-            showToast('Data exported successfully!', 'success');
-        } else {
-            const result = await response.json();
-            showToast(result.error || 'Export failed', 'error');
-        }
-    } catch (error) {
-        console.error('Export error:', error);
-        showToast('Export failed. Please try again.', 'error');
-    }
-}
-
-// Generate PDF report
-async function generateReport() {
-    try {
-        showToast('Generating report...', 'info');
-        
-        const response = await fetch(`${API_BASE_URL}/report`, {
-            method: 'GET',
-            headers: getHeaders()
-        });
-        
-        if (response.ok) {
-            const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.style.display = 'none';
-            a.href = url;
-            a.download = `composting_report_${new Date().toISOString().split('T')[0]}.pdf`;
-            document.body.appendChild(a);
-            a.click();
-            window.URL.revokeObjectURL(url);
-            showToast('Report generated successfully!', 'success');
-        } else {
-            const result = await response.json();
-            showToast(result.error || 'Report generation failed', 'error');
-        }
-    } catch (error) {
-        console.error('Report generation error:', error);
-        showToast('Report generation failed. Please try again.', 'error');
-    }
-}
-
-// Input validation helpers
-function validateNumericInput(input, min = null, max = null) {
-    const value = parseFloat(input.value);
-    
-    if (isNaN(value)) {
-        input.setCustomValidity('Please enter a valid number');
-        return false;
-    }
-    
-    if (min !== null && value < min) {
-        input.setCustomValidity(`Value must be at least ${min}`);
-        return false;
-    }
-    
-    if (max !== null && value > max) {
-        input.setCustomValidity(`Value must be at most ${max}`);
-        return false;
-    }
-    
-    input.setCustomValidity('');
-    return true;
-}
-
-// Add input validation event listeners
-document.addEventListener('DOMContentLoaded', function() {
-    // Moisture level validation (0-100%)
-    const moistureInput = document.getElementById('moistureLevel');
-    if (moistureInput) {
-        moistureInput.addEventListener('input', function() {
-            validateNumericInput(this, 0, 100);
-        });
-    }
-    
-    // Temperature validation (reasonable range)
-    const tempInput = document.getElementById('dailyTemp');
-    if (tempInput) {
-        tempInput.addEventListener('input', function() {
-            validateNumericInput(this, -50, 100);
-        });
-    }
-    
-    // Aeration frequency validation (non-negative)
-    const aerationInput = document.getElementById('aerationFreq');
-    if (aerationInput) {
-        aerationInput.addEventListener('input', function() {
-            validateNumericInput(this, 0);
-        });
-    }
-});
-
-// Error handling for network issues
-window.addEventListener('online', function() {
-    showToast('Connection restored', 'success');
-});
-
-window.addEventListener('offline', function() {
-    showToast('Connection lost. Please check your internet.', 'error');
-});
+        const response = await fetch
