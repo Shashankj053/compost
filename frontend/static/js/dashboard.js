@@ -1,4 +1,6 @@
-// Dashboard specific JavaScript
+// API base URL updated to local backend
+const API_BASE_URL = 'http://localhost:5000/api';
+
 let experimentsData = [];
 let analyticsData = {};
 
