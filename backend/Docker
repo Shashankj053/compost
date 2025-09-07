@@ -1,0 +1,22 @@
+FROM python:3.10
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y build-essential
+
+# Set work directory
+WORKDIR /app
+
+# Install Python dependencies
+COPY requirements.txt .
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+# Copy your code
+COPY . .
+
+# Expose the port Cloud Run will use
+ENV PORT=8080
+EXPOSE 8080
+
+# Start your application (update as needed)
+CMD ["python", "main.py"]
